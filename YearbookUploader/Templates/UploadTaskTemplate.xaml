@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:models="clr-namespace:YearbookUploader.Models"
+                    xmlns:helpers="clr-namespace:YearbookUploader.Helpers"
+                    x:Class="YearbookUploader.Templates.UploadTaskTemplate">
+    <helpers:BooleanNegation x:Key="BooleanNegation"/>
+    <helpers:FilePathToFileName x:Key="FilePathToFileName"/>
+    <DataTemplate DataType="{x:Type models:UploadTask}" x:Key="UploadTaskTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" /> 
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Task Name"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" Text="{Binding TaskName}"/>
+            <Label Grid.Row="1" Grid.Column="0">Folder Path</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" Text="{Binding Folder}"/>
+            <Button x:Name="BrowseFolderButton" Grid.Row="1" Grid.Column="2" Click="BrowseFolderButton_Click">Browse</Button>
+            
+            <Label Grid.Row="2" Grid.Column="0">First File Name</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" Text="{Binding FirstFileName, Converter={StaticResource FilePathToFileName}}"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="BrowseFirstFileButton" Click="BrowseFirstFileButton_Click">Browse</Button>
+            
+            <Label Grid.Row="2" Grid.Column="3">Last File Name</Label>
+            <TextBox Grid.Row="2" Grid.Column="4" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" Text="{Binding LastFileName, Converter={StaticResource FilePathToFileName}}"/>
+            <Button x:Name="BrowseLastFileButton" Grid.Row="2" Grid.Column="5" Click="BrowseLastFileButton_Click">Browse</Button>
+            
+            <Label Grid.Row="3" Grid.Column="0">Local Backup Path</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" Text="{Binding LocalBackupPath}"/>
+            <Button x:Name="BrowseLocalPath" Grid.Row="3" Grid.Column="2" Click="BrowseLocalPath_Click">Browse</Button>
+            
+            <Label Grid.Row="3" Grid.Column="3">Overwrite All By Default</Label>
+            <CheckBox Grid.Row="3" Grid.Column="4" MinWidth="128" IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegation}}" IsChecked="{Binding OverwriteAll}"/>
+
+            <Label Grid.Row="4" Grid.Column="0">State</Label>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding State}" />
+            <Button Grid.Row="4" Grid.Column="2" Click="Button_Click">Reset State</Button>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
